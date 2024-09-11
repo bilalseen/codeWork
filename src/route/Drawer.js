@@ -1,5 +1,5 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import JobDetail from "../screens/JobDetail";
+import Favorite from "../screens/Favorite";
 import Jobs from "../screens/Jobs";
 
 const Drawer = createDrawerNavigator();
@@ -8,7 +8,13 @@ export default MyDrawer = () => {
   return (
     <Drawer.Navigator>
       <Drawer.Screen name="Jobs" component={Jobs} />
-      <Drawer.Screen name="JobDetail" component={JobDetail} />
+      <Drawer.Screen
+        options={{
+          drawerLabel: "Favorited Jobs",
+        }}
+        name="Favorite"
+        component={Favorite}
+      />
     </Drawer.Navigator>
   );
 };
