@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { Text, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import React from "react";
 
 export default function JobCard({ item, navigation }) {
@@ -19,6 +19,8 @@ export default function JobCard({ item, navigation }) {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    width: Dimensions.get("window").width * 0.9,
+    height: Dimensions.get("window").width * 0.3,
     marginVertical: 10,
     marginHorizontal: 5,
     borderColor: "gray",
