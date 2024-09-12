@@ -6,7 +6,7 @@ const initialState = {
 
 const favoriteJobSlice = createSlice({
   name: "favoriteJob",
-  initialState: [],
+  initialState,
   reducers: {
     addFavoriteJob: (state, action) => {
       state.push(action.payload);
