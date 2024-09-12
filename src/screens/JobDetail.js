@@ -7,10 +7,12 @@ import {
   TouchableOpacity,
   Linking,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import RenderHTML from "react-native-render-html";
-import { Heart, LogOut } from "lucide-react-native";
+import { Heart, HeartOff, LogOut } from "lucide-react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavoriteJob, removeFavoriteJob } from "../redux/jobSlice";
 
 export default function JobDetail({ route }) {
   const { itemID } = route.params;
@@ -19,9 +21,30 @@ export default function JobDetail({ route }) {
     `https://www.themuse.com/api/public/jobs/${itemID}`
   );
 
+  const [isItFavorite, setFavorite] = useState(false);
+
+  const dispatch = useDispatch();
+  const favoriteJobs = useSelector((state) => state.favoriteJob);
+
+  useEffect(() => {
+    favoriteJobs.map((job) => job.id == itemID && setFavorite(true));
+  }, [itemID]);
+
+  console.log(isItFavorite);
+
+  const handleAddFavorite = () => {
+    dispatch(addFavoriteJob(data));
+    setFavorite(true);
+  };
+
+  const handleDeleteFavorite = () => {
+    dispatch(removeFavoriteJob({ id: itemID }));
+    setFavorite(false);
+  };
+
   if (loading) {
     return (
-      <View style={styles.container}>
+      <View style={styles.centeredContainer}>
         <Text>Loading...</Text>
       </View>
     );
@@ -29,7 +52,7 @@ export default function JobDetail({ route }) {
 
   if (error) {
     return (
-      <View style={styles.container}>
+      <View style={styles.centeredContainer}>
         <Text>Error: {error.message}</Text>
       </View>
     );
@@ -39,79 +62,44 @@ export default function JobDetail({ route }) {
 
   return (
     <ScrollView style={styles.container}>
-      <View
-        style={{
-          paddingBottom: 50,
-        }}
-      >
-        <Text style={{ fontSize: 24, fontWeight: "600", color: "#3A4A52" }}>
-          {data.name}
-        </Text>
-        <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
-          <Text style={{ color: "#EF5350", fontWeight: "500", fontSize: 12 }}>
-            Locations:
-          </Text>
-          <Text style={{ fontWeight: "500", fontSize: 12 }}>
-            {data.locations[0].name}
-          </Text>
+      <View style={styles.content}>
+        <Text style={styles.title}>{data.name}</Text>
+        <View style={styles.row}>
+          <Text style={styles.label}>Locations:</Text>
+          <Text style={styles.value}>{data.locations[0].name}</Text>
         </View>
-        <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
-          <Text style={{ color: "#EF5350", fontWeight: "500", fontSize: 12 }}>
-            Job Level:
-          </Text>
-          <Text style={{ fontWeight: "500", fontSize: 12 }}>
-            {data.levels[0].name}
-          </Text>
+        <View style={styles.row}>
+          <Text style={styles.label}>Job Level:</Text>
+          <Text style={styles.value}>{data.levels[0].name}</Text>
         </View>
-        <Text
-          style={{
-            color: "#37474F",
-            fontWeight: "600",
-            fontSize: 16,
-            textAlign: "center",
-          }}
-        >
-          Job Detail
-        </Text>
+        <Text style={styles.detailHeader}>Job Detail</Text>
         <RenderHTML
           contentWidth={deviceWidth}
           source={{ html: `${data.contents}` }}
         />
-        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+        <View style={styles.buttonContainer}>
           <TouchableOpacity
             onPress={() => Linking.openURL(data.refs.landing_page)}
-            style={{
-              backgroundColor: "#EF5350",
-              width: deviceWidth / 2.5,
-              height: 50,
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: 5,
-              flexDirection: "row",
-              alignItems: "center",
-              gap: 5,
-            }}
+            style={styles.button}
           >
             <LogOut color="#fff" size={24} />
-            <Text style={{ color: "#fff", fontWeight: "500" }}>Submit</Text>
+            <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={{
-              backgroundColor: "#EF5350",
-              width: deviceWidth / 2.5,
-              height: 50,
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: 5,
-              flexDirection: "row",
-              alignItems: "center",
-              gap: 5,
-            }}
+            onPress={isItFavorite ? handleDeleteFavorite : handleAddFavorite}
+            style={styles.button}
           >
-            <Heart color="#fff" size={24} fill={"#fff"} />
-            <Text style={{ color: "#fff", fontWeight: "500" }}>
-              Favorite Job
-            </Text>
+            {isItFavorite ? (
+              <>
+                <HeartOff color="#fff" size={24} fill={"#fff"} />
+                <Text style={styles.buttonText}>Unfavorite Job</Text>
+              </>
+            ) : (
+              <>
+                <Heart color="#fff" size={24} fill={"#fff"} />
+                <Text style={styles.buttonText}>Favorite Job</Text>
+              </>
+            )}
           </TouchableOpacity>
         </View>
       </View>
@@ -123,7 +111,60 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    gap: 10,
     backgroundColor: "#fff",
+  },
+  centeredContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
+  },
+  content: {
+    paddingBottom: 50,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "600",
+    color: "#3A4A52",
+  },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 5,
+  },
+  label: {
+    color: "#EF5350",
+    fontWeight: "500",
+    fontSize: 12,
+  },
+  value: {
+    fontWeight: "500",
+    fontSize: 12,
+  },
+  detailHeader: {
+    color: "#37474F",
+    fontWeight: "600",
+    fontSize: 16,
+    textAlign: "center",
+    marginVertical: 10,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 20,
+  },
+  button: {
+    backgroundColor: "#EF5350",
+    width: Dimensions.get("window").width / 2.5,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 5,
+    flexDirection: "row",
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "500",
+    marginLeft: 5,
   },
 });
