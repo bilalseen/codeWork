@@ -3,7 +3,7 @@ import React from "react";
 
 export default function JobCard({ item, navigation }) {
   const handleNavigateDetail = () => {
-    navigation.navigate("JobDetail", { id: item.id });
+    navigation.navigate("JobDetail", { itemID: item.id });
   };
 
   return (
