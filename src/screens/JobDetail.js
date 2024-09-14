@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Linking,
+  ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import useFetch from "../hooks/useFetch";
@@ -45,7 +46,7 @@ export default function JobDetail({ route }) {
   if (loading) {
     return (
       <View style={styles.centeredContainer}>
-        <Text>Loading...</Text>
+        <ActivityIndicator size="large" color="#EF5350" />
       </View>
     );
   }

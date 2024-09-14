@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 import React, { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 import JobCard from "../components/JobCard";
@@ -29,7 +35,7 @@ export default function Jobs({ navigation }) {
   if (loading) {
     return (
       <View style={styles.container}>
-        <Text>Loading...</Text>
+        <ActivityIndicator size="large" color="#EF5350" />
       </View>
     );
   }
