@@ -24,7 +24,7 @@ export default function JobDetail({ route }) {
   const [isItFavorite, setFavorite] = useState(false);
 
   const dispatch = useDispatch();
-  const favoriteJobs = useSelector((state) => state.favoriteJob);
+  const favoriteJobs = useSelector((state) => state.favoriteJob.favoriteJob);
 
   useEffect(() => {
     favoriteJobs.map((job) => job.id == itemID && setFavorite(true));
