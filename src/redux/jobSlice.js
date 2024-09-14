@@ -9,10 +9,12 @@ const favoriteJobSlice = createSlice({
   initialState,
   reducers: {
     addFavoriteJob: (state, action) => {
-      state.push(action.payload);
+      state.favoriteJob.push(action.payload);
     },
     removeFavoriteJob: (state, action) => {
-      return state.filter((job) => job.id !== action.payload.id);
+      state.favoriteJob = state.favoriteJob.filter(
+        (job) => job.id !== action.payload.id
+      );
     },
   },
 });
