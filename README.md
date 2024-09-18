@@ -18,7 +18,6 @@ This project is part of the "Kodluyoruz React Native Mobile App" path. It is a j
 - **Muse API**: The data source for job listings.
 - **RenderHTML**: Used to display job details that come in HTML format.
 
-
 ## Installation
 
 1. Clone the repository:
@@ -41,35 +40,37 @@ This project is part of the "Kodluyoruz React Native Mobile App" path. It is a j
    npm start
    ```
 
-## Screenshots
+### Screenshots
+
+### Screenshots
 
 <div style="text-align: center;">
-
-  <div style="display: inline-block; margin-top: 25px;">
-    <p style="color: white; font-size: 20px; font-weight: 600;">Home Page</p>
-    <img src="./src/assets/images/codeWork_homepage.jpg" alt="Home Page" width="300">
-  </div>
-
-  <div style="display: inline-block; margin-top: 25px;">
-    <p style="color: white; font-size: 20px; font-weight: 600;">Detail Page</p>
-    <img src="./src/assets/images/codeWork_detailpage.jpg" alt="Detail Page" width="300">
-  </div>
-
-  <div style="display: inline-block; margin-top: 25px;">
-    <p style="color: white; font-size: 20px; font-weight: 600;">Detail Page (Unliked)</p>
-    <img src="./src/assets/images/codeWork_detailpage_unliked.jpg" alt="Detail Page Unliked" width="300">
-  </div>
-
-  <div style="display: inline-block; margin-top: 25px;">
-    <p style="color: white; font-size: 20px; font-weight: 600;">Detail Page (Liked)</p>
-    <img src="./src/assets/images/codeWork_detailpage_liked.jpg" alt="Detail Page Liked" width="300">
-  </div>
-
-  <div style="display: inline-block; margin-top: 25px;">
-    <p style="color: white; font-size: 20px; font-weight: 600;">Favorite Page</p>
-    <img src="./src/assets/images/codeWork_favoritepage.jpg" alt="Favorite Page" width="300">
-  </div>
-
+  <table style="margin: 0 auto;">
+    <tr>
+      <th style="text-align: center;">Home</th>
+      <th style="text-align: center;">Detail Page</th>
+      <th style="text-align: center;">Detail Page<br>(Unliked)</th>
+      <th style="text-align: center;">Detail Page<br>(Liked)</th>
+      <th style="text-align: center;">Favorite Page</th>
+    </tr>
+    <tr>
+      <td style="text-align: center;">
+        <img src="./src/assets/images/codeWork_homepage.jpg" alt="Home Page" height="300" height="600">
+      </td>
+      <td style="text-align: center;">
+        <img src="./src/assets/images/codeWork_detailpage.jpg" alt="Detail Page" height="300" height="600">
+      </td>
+      <td style="text-align: center;">
+        <img src="./src/assets/images/codeWork_detailpage_unliked.jpg" alt="Detail Page Unliked" height="300" height="600">
+      </td>
+      <td style="text-align: center;">
+        <img src="./src/assets/images/codeWork_detailpage_liked.jpg" alt="Detail Page Liked" height="300" height="600">
+      </td>
+      <td style="text-align: center;">
+        <img src="./src/assets/images/codeWork_favoritepage.jpg" alt="Favorite Page" height="300" height="600">
+      </td>
+    </tr>
+  </table>
 </div>
 
 ## API Information
