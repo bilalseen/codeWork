@@ -24,7 +24,7 @@ This project is part of the "Kodluyoruz React Native Mobile App" path. It is a j
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/job-finder-app.git
+   git clone https://github.com/bilalseen/codeWork.git
    cd job-finder-app
 
    ```
